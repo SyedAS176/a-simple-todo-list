@@ -2,6 +2,10 @@
 #include "TodoList.hpp"
 
 void TodoList::add(const std::string& desc) {
+    if (desc.empty()) {
+        std::cout << "Error: Task cannot be empty and must be a string!\n";
+        return;
+    }
     tasks.push_back(Task(desc));
 }
 
@@ -12,10 +16,11 @@ bool TodoList::complete(const std::string& desc) {
             return true;
         }
     }
+    std::cout << "Error: Task \"" << desc << "\" not found.\n";
     return false;
 }
 
-void TodoList::all() const {    // Displays all the tasks (even the completed ones)
+void TodoList::all() const {                          // Displays all the tasks (even the completed ones)
     if (tasks.empty()) {
         std::cout << "The list is empty." << std::endl;
         return;
@@ -30,7 +35,7 @@ void TodoList::all() const {    // Displays all the tasks (even the completed on
     }
 }
 
-void TodoList::completed() const {  // Displays only the completed tasks
+void TodoList::completed() const {                      // Displays only the completed tasks
     bool flag = false;
     for (auto& t : tasks) {
         if (t.completed()) {
@@ -58,6 +63,7 @@ void TodoList::incomplete() const { // Displays incomplete tasks
 
 void TodoList::clear() {    // Clears the TodoList object vector
     tasks.clear();
+    std::cout << "All tasks cleared.\n";
 }
 
 // Methods for unit testing
