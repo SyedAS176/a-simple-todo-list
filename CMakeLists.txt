@@ -15,7 +15,30 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(hello_test tests/hello_test.cpp src/hello.cpp)
-add_executable(main main.cpp src/hello.cpp)
+add_executable(task_test
+        src/TodoList.cpp
+        src/TodoList.hpp
+        src/Task.cpp
+        src/Task.hpp
+        tests/task_test.cpp
+        tests/TodoList_test.cpp
+)
 
-target_link_libraries(hello_test PRIVATE Catch2::Catch2WithMain)
+add_executable(TodoList_test
+        src/TodoList.cpp
+        src/TodoList.hpp
+        src/Task.cpp
+        src/Task.hpp
+        tests/task_test.cpp
+        tests/TodoList_test.cpp
+)
+
+add_executable(main
+        main.cpp
+        src/hello.cpp
+        src/TodoList.cpp
+        src/Task.cpp
+)
+
+target_link_libraries(task_test PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(TodoList_test PRIVATE Catch2::Catch2WithMain)
